@@ -196,10 +196,16 @@ class Composer extends React.Component {
      *
      * @param {String} html - pasted HTML
      */
-    handlePastedHTML(html) {
+    handlePastedHTML(html) {  
         const parser = new ExpensiMark();
+
+
+        if (html.includes('docs-internal-guid')) {
         const toPaste = parser.htmlToMarkdown(html)
-        this.paste(toPaste.substring(1,toPaste.length - 1));
+            this.paste(toPaste.substring(1, toPaste.length - 1));
+        } else {
+            this.paste(parser.htmlToMarkdown(html))
+        }
     }
 
     /**
@@ -211,7 +217,7 @@ class Composer extends React.Component {
     handlePaste(event) {
         event.preventDefault();
 
-        const {files, types} = event.clipboardData;
+        const { files, types } = event.clipboardData;
         const TEXT_HTML = 'text/html';
 
         // If paste contains files, then trigger file management
