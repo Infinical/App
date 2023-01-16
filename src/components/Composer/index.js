@@ -198,7 +198,8 @@ class Composer extends React.Component {
      */
     handlePastedHTML(html) {
         const parser = new ExpensiMark();
-        this.paste(parser.htmlToMarkdown(html));
+        const toPaste = parser.htmlToMarkdown(html)
+        this.paste(toPaste.substring(1,toPaste.length - 1));
     }
 
     /**
